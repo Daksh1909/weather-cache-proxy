@@ -31,13 +31,13 @@ router.get('/', cache('2 minutes'), limiter, async (req, res) => {
         const apiRes = await needle('get', `${API_BASE_URL}?${paramsGeocoding}`);
         const dataGeocoding = apiRes.body;
         const dataLat = dataGeocoding[0].lat;
-        const datalon = dataGeocoding[0].lon;
+        const dataLon = dataGeocoding[0].lon;
 
         // Search parameters for getting weather information from latitude and longitude
         const paramsWeather = new URLSearchParams({
             [API_KEY_NAME]: API_KEY_VALUE,
             lat: dataLat,
-            lon: datalon
+            lon: dataLon
         });
         const apiRes2 = await needle('get', `${API_BASE_URL_2}?${paramsWeather}`);
         const dataWeather = apiRes2.body;

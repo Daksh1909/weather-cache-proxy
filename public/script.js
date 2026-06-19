@@ -28,3 +28,9 @@ document.getElementById("getWeatherBtn").addEventListener("click", async () => {
     resultDiv.classList.add("hidden");
   }
 });
+
+document.getElementById("cityInput").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    document.getElementById("getWeatherBtn").click();
+  }
+});

@@ -1,4 +1,4 @@
-const url = require('url');
+
 const express = require('express');
 const router = express.Router();
 const needle = require('needle');
@@ -7,8 +7,7 @@ const rateLimit = require('express-rate-limit');
 
 const limiter = rateLimit({
     windowMs: 10 * 60 * 1000,
-    max: 5,
-    skip: (req, res) => res.apicacheHit === true
+    max: 5
 });
 
 const API_BASE_URL = process.env.API_BASE_URL;
@@ -17,7 +16,7 @@ const API_KEY_VALUE = process.env.API_KEY_VALUE;
 
 const API_BASE_URL_2 = process.env.API_BASE_URL_2;
 
-let cache = apicache.middleware;
+const cache = apicache.middleware;
 
 router.get('/', cache('2 minutes'), limiter, async (req, res) => {
     try {
@@ -25,7 +24,7 @@ router.get('/', cache('2 minutes'), limiter, async (req, res) => {
         const paramsGeocoding = new URLSearchParams({
             [API_KEY_NAME]: API_KEY_VALUE,
             limit: 3,
-            ...url.parse(req.url, true).query
+            ...req.query
         });
         // console.log(url.parse(req.url, true).query);
         const apiRes = await needle('get', `${API_BASE_URL}?${paramsGeocoding}`);

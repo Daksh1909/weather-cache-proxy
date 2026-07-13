@@ -135,5 +135,5 @@ GET /api?q=London
 
 ## How It Works
 
-The client side script sends request to the API, thne the route first calls the geocoding API which converts the city name to their respectice latitude and longitude. Then it calls the weather API using those coordinates to get the current weather conditions. Then it is returned to the frontend.
+The client side script sends request to the API, then the route first calls the geocoding API which converts the city name to their respective latitude and longitude. Then it calls the weather API using those coordinates to get the current weather conditions. Then it is returned to the frontend.
 
